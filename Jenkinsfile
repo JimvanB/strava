@@ -1,9 +1,6 @@
 node {
 
- environment {
-        strava_client_id     = credentials('strava_client_id')
-        strava_client_secret = credentials('strava_client_secret')
-    }
+
 
    stage('Clone Repository') {
         // Get some code from a GitHub repository
@@ -11,10 +8,10 @@ node {
    }
 
    stage('Build project') {
+ withEnv(['strava_client_id=strava_client_id','strava_client_secret=strava_client_secret']) {
 
             sh 'echo Testing env'
             sh 'echo $strava_client_id $strava_client_secret'
-            sh 'export strava_client_id=test'
 
 
           withMaven(
@@ -31,7 +28,7 @@ node {
 
            } // withMaven will discover the generated Maven artifacts, JUnit Surefire & FailSafe & FindBugs reports...
    }
-
+    }
    stage('Build image') {
            sh "docker build -t strava ./target/strava-0.0.1-SNAPSHOT.jar"
       }
