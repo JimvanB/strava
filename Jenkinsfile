@@ -1,8 +1,11 @@
 node {
-    environment {
-                   strava_client_id = credentials('strava_client_id')
-                   strava_client_secret = test
-                }
+
+     withCredentials([string(credentialsId: 'strava_client_id', variable: 'strava_client_id')]) {
+          sh 'echo withCred $strava_client_id'
+          sh 'export strava_client_id=$strava_client_id'
+             sh 'echo Testing env'
+
+   withEnv(['MYTOOL_HOME=/usr/local/mytool']) {
 
 
    stage('Clone Repository') {
@@ -11,15 +14,6 @@ node {
    }
 
    stage('Build project') {
-
-  withCredentials([string(credentialsId: 'strava_client_id', variable: 'strava_client_id')]) {
-      sh 'echo withCred $strava_client_id'
-      sh 'export strava_client_id=$strava_client_id'
-         sh 'echo Testing env'
-    }
-
-
-
 
           withMaven(
                // Maven installation declared in the Jenkins "Global Tool Configuration"
@@ -41,6 +35,8 @@ node {
 
    stage('Deploy Spring Boot Application') {
         sh "docker run --name strava -d -p 8080:8080 strava"
+   }
+   }
    }
 
 }
