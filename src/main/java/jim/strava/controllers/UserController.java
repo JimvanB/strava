@@ -24,7 +24,7 @@ public class UserController {
     private String stravaId;
     private String stravaSecret;
 
-    public UserController( @Value("${strava.client.id}") String stravaClient, @Value("${strava.client.secret}") String stravaSecret) {
+    public UserController( @Value("${strava_client_id}") String stravaClient, @Value("${strava_client_secret}") String stravaSecret) {
       //  this.userRepository = userRepository;
         this.stravaId = stravaClient;
         this.stravaSecret = stravaSecret;

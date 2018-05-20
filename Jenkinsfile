@@ -1,5 +1,10 @@
 node {
 
+ environment {
+        strava.client.id     = credentials('jenkins-aws-secret-key-id')
+        strava.client.secret = credentials('jenkins-aws-secret-access-key')
+    }
+
    stage('Clone Repository') {
         // Get some code from a GitHub repository
         git 'https://github.com/JimvanB/strava.git'
