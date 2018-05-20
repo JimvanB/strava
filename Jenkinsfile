@@ -8,7 +8,7 @@ node {
    }
 
    stage('Build project') {
- withEnv(['strava_client_id= credentials('strava_client_id')','strava_client_secret= credentials('strava_client_secretgit')']) {
+ withEnv(['strava_client_id= credentials("strava_client_id")','strava_client_secret= credentials("strava_client_secretgit")']) {
 
             sh 'echo Testing env'
             sh 'echo $strava_client_id $strava_client_secret'
