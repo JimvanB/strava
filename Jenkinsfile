@@ -14,7 +14,7 @@ node {
 
             sh 'echo Testing env'
             sh 'echo $strava_client_id $strava_client_secret'
-            sh 'setenv strava_client_id=test'
+            sh 'export strava_client_id=test'
 
 
           withMaven(
