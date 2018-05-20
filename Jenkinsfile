@@ -1,8 +1,8 @@
 node {
 
  environment {
-        strava.client.id     = credentials('jenkins-aws-secret-key-id')
-        strava.client.secret = credentials('jenkins-aws-secret-access-key')
+        strava_client_id     = credentials('strava_client_id')
+        strava_client_secret = credentials('strava_client_secret')
     }
 
    stage('Clone Repository') {
