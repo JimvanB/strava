@@ -1,7 +1,7 @@
 node {
 
      withCredentials([string(credentialsId: 'strava_client_id', variable: 'strava_client_id'),
-                    [string(credentialsId: 'strava_client_secret', variable: 'strava_client_secret')]) {
+                    string(credentialsId: 'strava_client_secret', variable: 'strava_client_secret')]) {
           sh 'echo withCred $strava_client_id'
           sh 'export strava_client_id=$strava_client_id'
           sh 'export strava_client_secret=$strava_client_secret'
