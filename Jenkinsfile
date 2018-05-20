@@ -1,4 +1,4 @@
-node {
+pipeline {
     environment {
                    strava_client_id = credentials('strava_client_id')
                    strava_client_secret = test
