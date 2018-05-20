@@ -37,6 +37,5 @@ node {
    stage('Deploy Spring Boot Application') {
         sh "docker run --name strava -d -p 8080:8080 strava"
    }
-   }
 }
 }
