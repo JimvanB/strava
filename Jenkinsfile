@@ -1,10 +1,13 @@
 node {
 
-     withCredentials([string(credentialsId: 'strava_client_id', variable: 'strava_client_id'),
-                    string(credentialsId: 'strava_client_secret', variable: 'strava_client_secret')]) {
+     withCredentials([string(credentialsId: 'strava_client_id', variable: 'strava_client_id')]) {
           sh 'echo withCred $strava_client_id'
           sh 'export strava_client_id=$strava_client_id'
-          sh 'export strava_client_secret=$strava_client_secret'
+             sh 'echo Testing env'
+     withCredentials([string(credentialsId: 'strava_client_secret', variable: 'strava_client_secret')]) {
+              sh 'echo withCred $strava_client_secret'
+              sh 'export strava_client_secret=$strava_client_secret'
+                 sh 'echo Testing env'
 
 
 
@@ -37,5 +40,5 @@ node {
         sh "docker run --name strava -d -p 8080:8080 strava"
    }
    }
-
+}
 }
