@@ -1,11 +1,11 @@
 node {
 
-     withCredentials([string(credentialsId: 'strava_client_id', variable: 'strava_client_id')]) {
+     withCredentials([string(credentialsId: 'strava_client_id', variable: 'strava_client_id'),
+                    [string(credentialsId: 'strava_client_secret', variable: 'strava_client_secret')]) {
           sh 'echo withCred $strava_client_id'
           sh 'export strava_client_id=$strava_client_id'
-             sh 'echo Testing env'
+          sh 'export strava_client_secret=$strava_client_secret'
 
-   withEnv(['MYTOOL_HOME=/usr/local/mytool']) {
 
 
    stage('Clone Repository') {
@@ -35,7 +35,6 @@ node {
 
    stage('Deploy Spring Boot Application') {
         sh "docker run --name strava -d -p 8080:8080 strava"
-   }
    }
    }
 
