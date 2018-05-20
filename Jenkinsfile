@@ -11,6 +11,11 @@ node {
    }
 
    stage('Build project') {
+
+            sh 'echo Testing env'
+            sh 'echo $strava_client_id $strava_client_secret'
+
+
           withMaven(
                // Maven installation declared in the Jenkins "Global Tool Configuration"
                maven: 'M3',
