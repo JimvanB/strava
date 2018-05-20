@@ -12,10 +12,13 @@ node {
 
    stage('Build project') {
 
-
+  withCredentials([string(credentialsId: 'strava_client_id', variable: 'strava_client_id')]) {
+      sh 'echo withCred $strava_client_id'
+      sh 'export strava_client_id'
+    }
 
             sh 'echo Testing env'
-            sh 'echo $strava_client_id $strava_client_secret'
+            sh 'echo credentials('strava_client_id') credentials('strava_client_id')'
 
 
           withMaven(
