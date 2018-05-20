@@ -1,10 +1,9 @@
-pipeline {
- agent any
+node {
     environment {
                    strava_client_id = credentials('strava_client_id')
                    strava_client_secret = test
                 }
-    stages{
+
 
    stage('Clone Repository') {
         // Get some code from a GitHub repository
@@ -40,5 +39,5 @@ pipeline {
    stage('Deploy Spring Boot Application') {
         sh "docker run --name strava -d -p 8080:8080 strava"
    }
-}
+
 }
