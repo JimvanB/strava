@@ -20,6 +20,7 @@ node {
                mavenLocalRepo: '.repository') {
 
              // Run the maven build
+              sh 'printenv'
              sh "mvn package"
 
            } // withMaven will discover the generated Maven artifacts, JUnit Surefire & FailSafe & FindBugs reports...
