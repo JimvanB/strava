@@ -3,7 +3,8 @@ package jim.strava.controllers;
 import jim.strava.domain.AuthorizedStravaUser;
 import jim.strava.domain.StravaResponse;
 import jim.strava.domain.User;
-import jim.strava.repository.UserRepository;
+//import jim.strava.repository.UserRepository;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -19,10 +20,14 @@ import org.springframework.web.client.RestTemplate;
 @RestController
 public class UserController {
 
-    private UserRepository userRepository;
+    //private UserRepository userRepository;
+    private String stravaId;
+    private String stravaSecret;
 
-    public UserController(UserRepository userRepository) {
-        this.userRepository = userRepository;
+    public UserController( @Value("${strava.client.id}") String stravaClient, @Value("${strava.client.secret}") String stravaSecret) {
+      //  this.userRepository = userRepository;
+        this.stravaId = stravaClient;
+        this.stravaSecret = stravaSecret;
     }
 
 //https://www.strava.com/oauth/authorize?client_id=24628&response_type=code&redirect_uri=http://localhost:8080/exchange_token&approval_prompt=force&scope=public
@@ -36,7 +41,7 @@ public class UserController {
     public String gettoken(@RequestParam("code") String code, @RequestParam("state") String state) {
         StravaResponse stravaResponse = new StravaResponse(code, state);
         RestTemplate restTemplate = new RestTemplate();
-        AuthorizedStravaUser result = restTemplate.postForEntity("https://www.strava.com/oauth/token?client_id=24628&client_secret=0146c72f39f65aae87023d2fbeb6072f6e2b28ad&code=" + stravaResponse.getCode(), null, AuthorizedStravaUser.class).getBody();
+        AuthorizedStravaUser result = restTemplate.postForEntity("https://www.strava.com/oauth/token?client_id="+stravaId+"&client_secret="+stravaSecret+"&code=" + stravaResponse.getCode(), null, AuthorizedStravaUser.class).getBody();
         HttpHeaders headers = new HttpHeaders();
         headers.add("Authorization","Bearer "+result.getAccess_token());
 
@@ -44,7 +49,7 @@ public class UserController {
         User userResult = restTemplate.exchange("https://www.strava.com/api/v3/athlete", HttpMethod.GET, entity, User.class).getBody();
 
         System.out.println(result);
-        userRepository.save(userResult);
+    //    userRepository.save(userResult);
         return userResult.toString();
     }
 

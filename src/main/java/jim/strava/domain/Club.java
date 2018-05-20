@@ -29,7 +29,7 @@ import javax.persistence.*;
     "admin",
     "owner"
 })
-@Entity
+//@Entity
 @Table(name = "clubs")
 public class Club {
     @Id

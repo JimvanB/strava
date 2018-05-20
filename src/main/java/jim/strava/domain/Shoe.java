@@ -15,7 +15,7 @@ import javax.persistence.*;
     "resource_state",
     "distance"
 })
-@Entity
+//@Entity
 @Table(name = "shoes")
 public class Shoe {
     @Id

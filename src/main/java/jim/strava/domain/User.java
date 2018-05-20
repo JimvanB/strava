@@ -41,7 +41,7 @@ import java.util.List;
     "bikes",
     "shoes"
 })
-@Entity
+//@Entity
 @Table(name = "users")
 public class User {
 
