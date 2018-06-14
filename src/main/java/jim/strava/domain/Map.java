@@ -8,23 +8,36 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
     "id",
+    "summary_polyline",
     "resource_state"
 })
-public class Athlete {
+public class Map {
 
     @JsonProperty("id")
-    private Integer id;
+    private String id;
+    @JsonProperty("summary_polyline")
+    private String summaryPolyline;
     @JsonProperty("resource_state")
     private Integer resourceState;
 
     @JsonProperty("id")
-    public Integer getId() {
+    public String getId() {
         return id;
     }
 
     @JsonProperty("id")
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = id;
+    }
+
+    @JsonProperty("summary_polyline")
+    public String getSummaryPolyline() {
+        return summaryPolyline;
+    }
+
+    @JsonProperty("summary_polyline")
+    public void setSummaryPolyline(String summaryPolyline) {
+        this.summaryPolyline = summaryPolyline;
     }
 
     @JsonProperty("resource_state")

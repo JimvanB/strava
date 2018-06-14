@@ -1,5 +1,7 @@
 package jim.strava.domain;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
  * Created by jim on 4-4-18.
  */
@@ -8,7 +10,8 @@ public class AuthorizedStravaUser {
     Long id;
     String access_token;
     String token_type;
-    Athlete athlete;
+    @JsonProperty("athlete")
+    StravaUser stravaUser;
 
     public String getAccess_token() {
         return access_token;
@@ -26,11 +29,11 @@ public class AuthorizedStravaUser {
         this.token_type = token_type;
     }
 
-    public Athlete getAthlete() {
-        return athlete;
+    public StravaUser getStravaUser() {
+        return stravaUser;
     }
 
-    public void setAthlete(Athlete athlete) {
-        this.athlete = athlete;
+    public void setStravaUser(StravaUser stravaUser) {
+        this.stravaUser = stravaUser;
     }
 }
